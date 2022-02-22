@@ -1,0 +1,188 @@
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "arcade classic";
+  src: url("/assets/fonts/ARCADECLASSIC.TTF");
+}
+
+body {
+  font-family: "arcade classic";
+  background: black;
+}
+
+/* navbar : start */
+nav {
+  background: black !important;
+  font-size: 24px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /*  */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  nav {
+    font-size: 28px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /*  */
+}
+/* navbar : end */
+
+/* jumbotron : start */
+#jumbotron {
+  margin-top: -7rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #jumbotron {
+    margin-top: -13rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #jumbotron {
+    margin-top: -17rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /*  */
+}
+/* jumbotron : end */
+/* five kongs : start */
+#fivekongs {
+  margin-top: -17rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #fivekongs {
+    margin-top: -30rem;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #fivekongs {
+    margin-top: -40rem;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  #fivekongs {
+    margin-top: -48rem;
+  }
+}
+/* five kongs : end */
+
+/* content : start */
+#content {
+  color: #9f9f9f;
+  margin-top: -8rem;
+}
+
+#content h3 {
+  font-size: 34px;
+}
+
+#content p,
+#content ol li {
+  font-size: 28px;
+}
+
+#content ol {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #content {
+    margin-top: -15rem;
+  }
+
+  #content h3 {
+    font-size: 50px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #content {
+    margin-top: -20rem;
+  }
+
+  #content h3 {
+    font-size: 60px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  #content {
+    margin-top: -25rem;
+  }
+}
+/* content : end */
+
+/* content faq : start */
+#content #faq {
+  margin-top: 5rem;
+}
+#content #faq #a {
+  padding-left: 3rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /*  */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  /*  */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /*  */
+}
+/* content team : end */
+/* content team : start */
+#content #team {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+#content #team #a {
+  padding-left: 3rem;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  /*  */
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  /*  */
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  /*  */
+}
+/* content team : end */
