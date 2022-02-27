@@ -19,7 +19,6 @@ import { AlertState } from './utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
-// import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
@@ -43,9 +42,7 @@ export interface HomeProps {
 }
 
 const Home = (props: HomeProps) => {
-  // const [balance, setBalance] = useState<number>();
   const [isUserMinting, setIsUserMinting] = useState(false);
-  const [isWhitelisted, SetWhitelisted] = useState(false);
   const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
   const [alertState, setAlertState] = useState<AlertState>({
     open: false,
@@ -95,24 +92,8 @@ const Home = (props: HomeProps) => {
 
   const onMint = async () => {
     try {
-      let res = await fetch(`https://zillaswhitelistapi.herokuapp.com/whitelisted/member/${(wallet).publicKey}`,
-                      {method: "GET"});
-      console.log(`https://zillaswhitelistapi.herokuapp.com/whitelisted/member/${(wallet).publicKey}`)
-
-      const res_json = await res.json()
-      const res_num = await JSON.parse(JSON.stringify(res_json)).reserve //The number  of reserves the user has left
-      console.log(res_num)
-      if(!isWhitelisted){
-        // throw new Error("You are not whitelisted");
-        window.alert("You are not whitelisted");
-      }
-      if(res_num - 1 < 0){
-        // window.alert("confirmed");
-        console.log("confirmed")
-        throw new Error("Not enough reserves");
-      }
       setIsUserMinting(true);
-      // document.getElementById('#identity')?.click();
+      document.getElementById('#identity')?.click();
       if (wallet.connected && candyMachine?.program && wallet.publicKey) {
         const mintTxId = (
           await mintOneToken(candyMachine, wallet.publicKey)
@@ -124,7 +105,7 @@ const Home = (props: HomeProps) => {
             mintTxId,
             props.txTimeout,
             props.connection,
-            true
+            true,
           );
         }
 
@@ -134,17 +115,6 @@ const Home = (props: HomeProps) => {
             message: 'Congratulations! Mint succeeded!',
             severity: 'success',
           });
-
-          const to_send = await JSON.stringify({"reserve": res_num-1})
-          await fetch(`https://zillaswhitelistapi.herokuapp.com/whitelisted/update/${(wallet).publicKey}/zilla123`, {
-            method: "PUT",
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: to_send})
-          console.log("Updated Reserves for user")
-          console.log(`https://zillaswhitelistapi.herokuapp.com/whitelisted/member/${(wallet).publicKey}`)
-
         } else {
           setAlertState({
             open: true,
@@ -156,11 +126,11 @@ const Home = (props: HomeProps) => {
     } catch (error: any) {
       let message = error.msg || 'Minting failed! Please try again!';
       if (!error.msg) {
-        if (!error.msg) {
+        if (!error.message) {
           message = 'Transaction Timeout! Please try again.';
-        } else if (error.msg.indexOf('0x137')) {
+        } else if (error.message.indexOf('0x137')) {
           message = `SOLD OUT!`;
-        } else if (error.msg.indexOf('0x135')) {
+        } else if (error.message.indexOf('0x135')) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
@@ -169,10 +139,6 @@ const Home = (props: HomeProps) => {
           window.location.reload();
         } else if (error.code === 312) {
           message = `Minting period hasn't started yet.`;
-        } else if (error.msg === "You are not whitelisted"){
-          message = error.msg;
-        } else if (error.msg === "Not enough reserves"){
-          message = error.msg;
         }
       }
 
@@ -182,32 +148,13 @@ const Home = (props: HomeProps) => {
         severity: 'error',
       });
     } finally {
-      if (wallet) {
-        // const balance = await props.connection.getBalance(wallet.publicKey);
-        // setBalance(balance / LAMPORTS_PER_SOL);
-      }
       setIsUserMinting(false);
     }
   };
 
   useEffect(() => {
     refreshCandyMachineState();
-    (async () => {
-      if (wallet) {
-        // const balance = await props.connection.getBalance(wallet.publicKey);
-        // setBalance(balance / LAMPORTS_PER_SOL);
-        const data = await fetch(`https://zillaswhitelistapi.herokuapp.com/whitelisted/member/${(wallet).publicKey}`)
-        console.log(`https://zillaswhitelistapi.herokuapp.com/whitelisted/member/${(wallet).publicKey}`)
-        if(data.status.toString() !== "404"){
-          SetWhitelisted(true)
-        }
-        else{
-          console.log("not found")
-        }
-      }
-    })();
   }, [
-    wallet,
     anchorWallet,
     props.candyMachineId,
     props.connection,
