@@ -213,6 +213,7 @@ const Home = (props: HomeProps) => {
                   <Header candyMachine={candyMachine} />
                   <MintContainer>
                     {candyMachine?.state.isActive &&
+                    candyMachine?.state.gatekeeper &&
                     wallet.publicKey &&
                     wallet.signTransaction ? (
                       <GatewayProvider
