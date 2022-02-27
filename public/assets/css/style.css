@@ -4,7 +4,7 @@ html {
 
 @font-face {
   font-family: "arcade classic";
-  src: url("/assets/fonts/ARCADECLASSIC.TTF");
+  src: url("../fonts/ARCADECLASSIC.TTF");
 }
 
 body {
